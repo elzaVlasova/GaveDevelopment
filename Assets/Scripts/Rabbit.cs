@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿	using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -84,17 +84,18 @@ public class Rabbit : MonoBehaviour {
 		}
 
 		if (this.JumpActive) {
-			this.JumpTime += Time.deltaTime;
+			if (Input.GetButton("Jump")){
+				this.JumpTime += Time.deltaTime; 
 
 			if (this.JumpTime < this.MaxJumpTime) {
 				Vector2 vel = this.myBody.velocity;
 				vel.y = JumpSpeed * (1.0f - JumpTime / MaxJumpTime);
 				myBody.velocity = vel;
-			}
-		else {
-			this.JumpActive = false;
-			this.JumpTime = 0;
+			} else {
+				this.JumpActive = false;
+				this.JumpTime = 0;
 			} 
+		}
 		} 
 	}
 }
