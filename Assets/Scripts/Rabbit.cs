@@ -8,11 +8,13 @@ public class Rabbit : MonoBehaviour {
 
 	Rigidbody2D myBody = null;
 	Transform heroParent = null;
+	public static Animator animator = null;
 
 	bool isGrounded = false;
 	bool JumpActive = false;
 
 	float JumpTime = 0f;
+
 
 	public float MaxJumpTime = 2f;
 	public float JumpSpeed = 2f;
@@ -21,6 +23,7 @@ public class Rabbit : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		myBody = this.GetComponent<Rigidbody2D>();
+		animator = this.GetComponent<Animator> ();
 		LevelController.current.SetStartPosition(transform.position);
 		this.heroParent = this.transform.parent;
 	}
@@ -47,7 +50,7 @@ public class Rabbit : MonoBehaviour {
 		// speed (встановленна за замовчуванням швидківсть кролика)
 		// value (ініціалізована вище сила давлення користувача на джойстик)
 
-		Animator animator = GetComponent<Animator> ();
+
 
 		if (Mathf.Abs (value) > 0) {
 			Vector2 vel = myBody.velocity;

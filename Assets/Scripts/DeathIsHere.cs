@@ -9,6 +9,7 @@ public class DeathIsHere : MonoBehaviour {
 
 		if (rabbit != null) {
 			LevelController.current.OnRabbitDeath(rabbit);
+			rabbit.GetComponent<Animator> ().SetTrigger("die");
 		}
 	}
 }
