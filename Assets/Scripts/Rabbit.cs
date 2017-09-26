@@ -5,7 +5,9 @@ using UnityEngine;
 public class Rabbit : MonoBehaviour {
 
 	public float speed = 1;
+
 	Rigidbody2D myBody = null;
+	Transform heroParent = null;
 
 	bool isGrounded = false;
 	bool JumpActive = false;
@@ -20,12 +22,21 @@ public class Rabbit : MonoBehaviour {
 	void Start () {
 		myBody = this.GetComponent<Rigidbody2D>();
 		LevelController.current.SetStartPosition(transform.position);
-		Debug.Log (transform.position);
+		this.heroParent = this.transform.parent;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	static void SetNewParent(Transform obj, Transform new_par){
+		if (obj.transform.parent != new_par) {
+			Vector3 pos = obj.transform.position;
+
+			obj.transform.parent = new_par;
+			obj.transform.position = pos;
+		}
 	}
 
 	void FixedUpdate() {
@@ -75,6 +86,12 @@ public class Rabbit : MonoBehaviour {
 			isGrounded = true;
 		} else {
 			isGrounded = false;
+		}
+
+		if (hit.transform != null && hit.transform.GetComponent<MovingPlatform> () != null) {
+			SetNewParent (this.transform, hit.transform);
+		} else {
+			SetNewParent (this.transform, this.heroParent);
 		}
 
 		Debug.DrawLine (from, to, Color.red);
