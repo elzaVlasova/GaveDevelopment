@@ -43,7 +43,7 @@ public class MovingPlatform : MonoBehaviour {
 		if (IsArrived(my_pos, target)) {
 			going_to_a = !going_to_a;
 			move = new Vector3(0, 0, 0);
-			Debug.Log ("We changed the direction");
+			//Debug.Log ("We changed the direction");
 			return;
 		}
 	}

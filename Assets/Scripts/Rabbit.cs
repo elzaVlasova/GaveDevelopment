@@ -11,7 +11,9 @@ public class Rabbit : MonoBehaviour {
 	public static Animator animator = null;
 
 	bool isGrounded = false;
+	bool isBig = false;
 	bool JumpActive = false;
+	Vector3 normal_scale;
 
 	float JumpTime = 0f;
 
@@ -26,6 +28,7 @@ public class Rabbit : MonoBehaviour {
 		animator = this.GetComponent<Animator> ();
 		LevelController.current.SetStartPosition(transform.position);
 		this.heroParent = this.transform.parent;
+		normal_scale = this.transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -33,13 +36,30 @@ public class Rabbit : MonoBehaviour {
 		
 	}
 
-	static void SetNewParent(Transform obj, Transform new_par){
+	static void SetNewParent(Transform obj, Transform new_par){ 
 		if (obj.transform.parent != new_par) {
 			Vector3 pos = obj.transform.position;
 
 			obj.transform.parent = new_par;
 			obj.transform.position = pos;
 		}
+	}
+
+	public void MakeBigger(){
+		this.transform.localScale = normal_scale*1.5f;
+		this.isBig = true;
+		this.JumpActive = false;
+		this.isGrounded = true;
+	}
+
+	public void MakeNormalScale(){
+		this.transform.localScale = normal_scale;
+		this.isBig = false;
+	}
+		
+
+	public bool IsBig(){
+		return isBig;
 	}
 
 	void FixedUpdate() {
