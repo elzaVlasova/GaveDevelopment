@@ -1,4 +1,4 @@
-﻿	using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,9 @@ public class Rabbit : MonoBehaviour {
 
 	Rigidbody2D myBody = null;
 	Transform heroParent = null;
+	//SpriteRenderer myRenderer = null;
 	public static Animator animator = null;
+
 
 	bool isGrounded = false;
 	bool isBig = false;
