@@ -11,16 +11,15 @@ public class OrcBase : MonoBehaviour {
 
 	Mode mode;
 
-	bool going_to_a = false;
 
 
 	public float speed = 1;
 
-	bool isDead;
+	bool isDead = false;
 
 	Rigidbody2D myBody = null;
 	SpriteRenderer myRenderer = null;
-	public static Animator animator = null;
+	public Animator animator = null;
 
 	public enum Mode{GoToA,GoToB,Attack}
 
@@ -66,6 +65,13 @@ public class OrcBase : MonoBehaviour {
 		Vector3 position = this.transform.position;
 
 		// 1. Task
+		Vector3 rabbit_position = Rabbit.lastRabbit.transform.position;
+
+		if (rabbit_position.x > Mathf.Min (pointA.x, pointB.x) && rabbit_position.y < Mathf.Max (pointA.x, pointB.x)) {
+			mode = Mode.Attack;
+			//Debug.Log ("Mode attack" );
+		}
+
 		if (shouldPatrolAb()) {
 			if(mode == Mode.GoToA && isArrived(position, this.pointA)){
 				mode = Mode.GoToB;
@@ -74,6 +80,8 @@ public class OrcBase : MonoBehaviour {
 				mode = Mode.GoToA;
 			}
 		}
+
+
 
 		// 2. Point
 		Vector3 target = pointA;
@@ -86,6 +94,14 @@ public class OrcBase : MonoBehaviour {
 		//Debug.Log ("Target" + target);
 
 		//3. Direction
+
+		if (mode == Mode.Attack) {
+			if (position.x < rabbit_position.x) {
+				return 1;
+			} else { return -1;
+			}
+		}
+
 		if (position.x < target.x) {
 			return 1;
 		} else if (position.x > target.x) {
@@ -95,6 +111,59 @@ public class OrcBase : MonoBehaviour {
 		}
 	}
 
+	void OnOrcDeath(){
+		Debug.Log ("On orc death");
+		isDead = true;
+		this.animator.SetBool("die", true);
+		this.myBody.isKinematic = true;
+		this.GetComponent<BoxCollider2D> ().enabled = false;
+		StartCoroutine (DestroyOrcBody (3.0f));
+	}
+
+	IEnumerator DestroyOrcBody(float duration){
+		
+		yield return new WaitForSeconds (duration);
+		Destroy (this.gameObject);
+		
+	}
+
+	/*protected virtual void AttackRabbit(Rabbit rabbit){
+		
+	}*/
+
+	void AttackRabbit(Rabbit rabbit){
+		this.animator.SetTrigger ("attack");
+
+		LevelController.current.OnRabbitDeath(rabbit);
+	}
+
+	void OnCollideWithRabbit(Rabbit rabbit){
+		Debug.Log ("Collided");
+		float rabbit_y = rabbit.transform.position.y;
+		float orc_y = this.transform.position.y;
+
+
+		if (rabbit_y > orc_y && rabbit_y - orc_y > 0.4f) {
+			this.OnOrcDeath (); 
+			Debug.Log ("Death");
+			return;
+		} 
+
+		if (!isDead) {
+			Debug.Log ("Attack");
+			this.AttackRabbit (rabbit);
+		}
+
+
+	}
+
+	void OnTriggerEnter2D (Collider2D collider){
+		Rabbit rabbit = collider.GetComponent<Rabbit> ();
+
+		if (rabbit != null) {
+			OnCollideWithRabbit(rabbit);
+		}
+	}
 
 	void FixedUpdate ()
 	{

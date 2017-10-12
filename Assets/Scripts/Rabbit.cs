@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Rabbit : MonoBehaviour {
 
+	public static Rabbit lastRabbit = null;
+
 	public float speed = 1;
 
 	Rigidbody2D myBody = null;
@@ -22,6 +24,10 @@ public class Rabbit : MonoBehaviour {
 
 	public float MaxJumpTime = 2f;
 	public float JumpSpeed = 2f;
+
+	void Awake (){
+		lastRabbit = this;
+	}
 
 
 	// Use this for initialization
