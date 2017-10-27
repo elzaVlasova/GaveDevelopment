@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4413407031500322}
   - component: {fileID: 212080033656934594}
   - component: {fileID: 60464947829624318}
+  - component: {fileID: 114322670719766704}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -90,6 +91,17 @@ PolygonCollider2D:
       - {x: 0.4996528, y: -0.14329852}
       - {x: 0.6696528, y: -0.10329853}
       - {x: 0.81965286, y: -0.03329853}
+--- !u!114 &114322670719766704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234449691172542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318654c5ecf4f97459f0b95a3cec1a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212080033656934594
 SpriteRenderer:
   m_ObjectHideFlags: 1

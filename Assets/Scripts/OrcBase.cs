@@ -6,28 +6,10 @@ public class OrcBase : MonoBehaviour {
 	public GameObject prefab;
 	//public Transform launchPoint = this.transform;
 
-	void launchCarrot (float direction){
-		Vector3 launchPos = this.transform.position;
-	
-		GameObject obj = Instantiate (this.prefab, launchPos, Quaternion.identity);
-		obj.transform.position = this.transform.position + Vector3.up;
-
-		Weapon carrot = obj.GetComponent<Weapon> ();
-		carrot.launch(direction);
-	}
-
-	float getRabbitDirection(Rabbit rabbit){
-		
-		if (rabbit.transform.position.x < this.transform.position.x) {
-			return 1;
-		} else {
-			return -1;
-		}
-	}
-
 
 	public Vector3 MoveBy;
 	public float MoveSpeed = 2;
+	float attackDirection;
 
 	Vector3 pointA;
 	Vector3 pointB;
@@ -43,6 +25,7 @@ public class OrcBase : MonoBehaviour {
 	Rigidbody2D myBody = null;
 	SpriteRenderer myRenderer = null;
 	public Animator animator = null;
+	public float shootTime;
 
 	public enum Mode{GoToA,GoToB,Attack}
 
@@ -58,7 +41,7 @@ public class OrcBase : MonoBehaviour {
 		pointB = pointA + MoveBy;
 
 		Debug.Log ("Point A: " + pointA + "; Point B:" + pointB);
-		launchCarrot (1);
+		//launchCarrot (1);
 
 	}
 
@@ -81,6 +64,9 @@ public class OrcBase : MonoBehaviour {
 		return Vector3.Distance (current, target) < 0.01f;
 	}
 
+
+
+
 	float getDirection(){
 
 		if (isDead) {
@@ -94,7 +80,7 @@ public class OrcBase : MonoBehaviour {
 
 		if (rabbit_position.x > Mathf.Min (pointA.x, pointB.x) && rabbit_position.y < Mathf.Max (pointA.x, pointB.x)) {
 			mode = Mode.Attack;
-			//Debug.Log ("Mode attack" );
+			Debug.Log ("Mode attack" );
 		}
 
 		if (shouldPatrolAb()) {
@@ -116,15 +102,18 @@ public class OrcBase : MonoBehaviour {
 			target = this.pointB;
 		}
 
-		//Debug.Log ("Target" + target);
+
 
 		//3. Direction
 
 		if (mode == Mode.Attack) {
+			Debug.Log ("Attack");
 			if (position.x < rabbit_position.x) {
-				return 1;
-			} else { return -1;
+				attackDirection = 1;
+			} else { attackDirection = -1;
 			}
+			AttackRabbit (Rabbit.lastRabbit, attackDirection);
+			return 0;
 		}
 
 		if (position.x < target.x) {
@@ -156,10 +145,26 @@ public class OrcBase : MonoBehaviour {
 		
 	}*/
 
-	void AttackRabbit(Rabbit rabbit){
+
+
+	void AttackRabbit(Rabbit rabbit, float attackDirection){
 		this.animator.SetTrigger ("attack");
 
-		LevelController.current.OnRabbitDeath(rabbit);
+
+
+		if (attackDirection > 0) {
+			myRenderer.flipX = true;
+		} else { myRenderer.flipX = false;
+		}
+
+		StartCoroutine (ShootWeapon (attackDirection * (-1)));
+		//LevelController.current.OnRabbitDeath(rabbit);
+	}
+
+	IEnumerator ShootWeapon(float direction){
+		yield return new WaitForSeconds (3f);
+		launchCarrot (direction);
+
 	}
 
 	void OnCollideWithRabbit(Rabbit rabbit){
@@ -174,13 +179,8 @@ public class OrcBase : MonoBehaviour {
 			return;
 		} 
 
-		if (!isDead) {
-			Debug.Log ("Attack");
-			this.AttackRabbit (rabbit);
-		}
-
-
 	}
+		
 
 	void OnTriggerEnter2D (Collider2D collider){
 		Rabbit rabbit = collider.GetComponent<Rabbit> ();
@@ -216,6 +216,25 @@ public class OrcBase : MonoBehaviour {
 
 
 		} 
+	}
+
+	void launchCarrot (float direction){
+		Vector3 launchPos = this.transform.position;
+
+		GameObject obj = Instantiate (this.prefab, launchPos, Quaternion.identity);
+		obj.transform.position = this.transform.position + Vector3.up;
+
+		Weapon carrot = obj.GetComponent<Weapon> ();
+		carrot.launch(direction);
+	}
+
+	float getRabbitDirection(Rabbit rabbit){
+
+		if (rabbit.transform.position.x < this.transform.position.x) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 }
 
