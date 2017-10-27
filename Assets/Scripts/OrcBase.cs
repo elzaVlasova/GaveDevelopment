@@ -3,6 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OrcBase : MonoBehaviour {
+	public GameObject prefab;
+	//public Transform launchPoint = this.transform;
+
+	void launchCarrot (float direction){
+		Vector3 launchPos = this.transform.position;
+	
+		GameObject obj = Instantiate (this.prefab, launchPos, Quaternion.identity);
+		obj.transform.position = this.transform.position + Vector3.up;
+
+		Weapon carrot = obj.GetComponent<Weapon> ();
+		carrot.launch(direction);
+	}
+
+	float getRabbitDirection(Rabbit rabbit){
+		
+		if (rabbit.transform.position.x < this.transform.position.x) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+
+
 	public Vector3 MoveBy;
 	public float MoveSpeed = 2;
 
@@ -35,11 +58,13 @@ public class OrcBase : MonoBehaviour {
 		pointB = pointA + MoveBy;
 
 		Debug.Log ("Point A: " + pointA + "; Point B:" + pointB);
+		launchCarrot (1);
+
 	}
 
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 
 	protected virtual bool shouldPatrolAb(){

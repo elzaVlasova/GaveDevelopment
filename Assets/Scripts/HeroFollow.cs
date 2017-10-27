@@ -14,6 +14,7 @@ public class HeroFollow : MonoBehaviour {
 	// Update is called once per frame
 
 	void Update () {
+		
 		Transform rabbit_transform = rabbit.transform;
 		Transform camera_transform = this.transform;
 
