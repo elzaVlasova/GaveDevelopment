@@ -18,7 +18,7 @@ public class MovingPlatform : MonoBehaviour {
 		//Debug.Log ("Point A: " + pointA);
 		pointB = pointA + MoveBy;
 		//Debug.Log ("Point B: " + pointB);
-		this.wait = 5;
+		//this.wait = 5;
 		//Debug.Log ("Starting wait " + this.wait);
 	}
 		
@@ -31,6 +31,11 @@ public class MovingPlatform : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (this.wait > 0) {
+			this.wait -= Time.deltaTime;
+			return;
+		}
+
 
 		Vector3 my_pos = this.transform.position;
 		Vector3 target;
@@ -47,7 +52,7 @@ public class MovingPlatform : MonoBehaviour {
 		if (IsArrived(my_pos, target)) {
 			//Debug.Log ("Wait" + wait);
 			//Debug.Log ("Is arrived" + going_to_a);
-			//this.wait = 3;
+			this.wait = 3;
 			going_to_a = !going_to_a;
 			move = new Vector3(0, 0, 0);
 			//Debug.Log ("We changed the direction");

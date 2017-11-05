@@ -112,8 +112,13 @@ public class OrcBase : MonoBehaviour {
 				attackDirection = 1;
 			} else { attackDirection = -1;
 			}
+
 			AttackRabbit (Rabbit.lastRabbit, attackDirection);
 			return 0;
+		} 
+
+		if (LevelController.current.rabbitIsDead) {
+			mode = Mode.GoToA;
 		}
 
 		if (position.x < target.x) {
@@ -130,6 +135,7 @@ public class OrcBase : MonoBehaviour {
 		isDead = true;
 		this.animator.SetBool("die", true);
 		this.myBody.isKinematic = true;
+		Debug.Log("Velocity" + this.myBody.velocity.x);
 		this.GetComponent<BoxCollider2D> ().enabled = false;
 		StartCoroutine (DestroyOrcBody (3.0f));
 	}
@@ -157,15 +163,14 @@ public class OrcBase : MonoBehaviour {
 		} else { myRenderer.flipX = false;
 		}
 
-		StartCoroutine (ShootWeapon (attackDirection * (-1)));
+		shootTime = -Time.deltaTime;
+		if (shootTime <= 0) {
+		 launchCarrot(attackDirection * (-1));
+
+		}
 		//LevelController.current.OnRabbitDeath(rabbit);
 	}
-
-	IEnumerator ShootWeapon(float direction){
-		yield return new WaitForSeconds (3f);
-		launchCarrot (direction);
-
-	}
+		
 
 	void OnCollideWithRabbit(Rabbit rabbit){
 		Debug.Log ("Collided");
@@ -220,12 +225,12 @@ public class OrcBase : MonoBehaviour {
 
 	void launchCarrot (float direction){
 		Vector3 launchPos = this.transform.position;
-
 		GameObject obj = Instantiate (this.prefab, launchPos, Quaternion.identity);
 		obj.transform.position = this.transform.position + Vector3.up;
 
 		Weapon carrot = obj.GetComponent<Weapon> ();
 		carrot.launch(direction);
+		Destroy(carrot, 2f);
 	}
 
 	float getRabbitDirection(Rabbit rabbit){

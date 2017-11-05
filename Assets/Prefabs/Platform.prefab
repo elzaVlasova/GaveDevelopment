@@ -73,6 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveBy: {x: -4, y: 2, z: 0}
   MoveSpeed: 1
+  wait: 0.5
 --- !u!212 &212388367462725748
 SpriteRenderer:
   m_ObjectHideFlags: 1

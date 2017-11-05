@@ -68,7 +68,13 @@ public class OrcGreen : MonoBehaviour {
 		// 1. Task
 		Vector3 rabbit_position = Rabbit.lastRabbit.transform.position;
 
-		if (rabbit_position.x > Mathf.Min (pointA.x, pointB.x) && rabbit_position.y < Mathf.Max (pointA.x, pointB.x)) {
+		float pointLeft = Mathf.Min (pointA.x, pointB.x);
+		float pointRight = Mathf.Max(pointA.x, pointB.x);
+
+		Debug.Log("Left Point:" + pointLeft + "; Right Point" + pointRight);
+		 
+
+		if (rabbit_position.x > pointLeft && rabbit_position.x < pointRight) {
 			mode = Mode.Attack;
 			//Debug.Log ("Mode attack" );
 		}
