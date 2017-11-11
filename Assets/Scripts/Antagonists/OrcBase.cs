@@ -135,7 +135,7 @@ public class OrcBase : MonoBehaviour {
 		isDead = true;
 		this.animator.SetBool("die", true);
 		this.myBody.isKinematic = true;
-		Debug.Log("Velocity" + this.myBody.velocity.x);
+		//Debug.Log("Velocity" + this.myBody.velocity.x);
 		this.GetComponent<BoxCollider2D> ().enabled = false;
 		StartCoroutine (DestroyOrcBody (3.0f));
 	}

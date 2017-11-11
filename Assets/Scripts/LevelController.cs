@@ -8,6 +8,9 @@ public class LevelController : MonoBehaviour {
 
 	public bool rabbitIsDead = false;
 
+	public UILabel coinsLabel;
+	public GameObject settingsPrefab;
+
 	int coins;
 	int fruits;
 	int crystals;
@@ -15,6 +18,17 @@ public class LevelController : MonoBehaviour {
 
 	void Awake(){
 		current = this;
+	}
+
+	void Start(){
+		coinsLabel.text = "0000";
+	}
+
+
+	public void onPauseClick(){
+		GameObject parent = UICamera.first.transform.parent.gameObject;
+		GameObject obj = NGUITools.AddChild(parent, settingsPrefab);
+		Setting popup = obj.GetComponent<Setting>();
 	}
 
 
@@ -49,6 +63,8 @@ public class LevelController : MonoBehaviour {
 
 	public void addCoins(int quantity){
 		this.coins += quantity;
+		coinsLabel.text = coins.ToString ("0000");
+
 	}
 
 	public void addFruits(int quantity){
