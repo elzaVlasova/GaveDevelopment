@@ -128,7 +128,7 @@ public class OrcGreen : MonoBehaviour {
 		this.animator.SetBool("die", true);
 		this.myBody.isKinematic = true;
 		this.GetComponent<BoxCollider2D> ().enabled = false;
-		StartCoroutine (DestroyOrcBody (3.0f));
+		StartCoroutine (DestroyOrcBody (1.0f));
 	}
 
 	IEnumerator DestroyOrcBody(float duration){

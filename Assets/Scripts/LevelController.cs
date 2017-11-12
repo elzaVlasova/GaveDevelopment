@@ -9,6 +9,7 @@ public class LevelController : MonoBehaviour {
 	public bool rabbitIsDead = false;
 
 	public UILabel coinsLabel;
+	public UILabel fruitsLabel;
 	public GameObject settingsPrefab;
 
 	int coins;
@@ -22,6 +23,7 @@ public class LevelController : MonoBehaviour {
 
 	void Start(){
 		coinsLabel.text = "0000";
+		fruitsLabel.text = "0";
 	}
 
 
@@ -47,6 +49,7 @@ public class LevelController : MonoBehaviour {
 		StartCoroutine (returnLater (rabbit));
 		rabbitIsDead = true;
 		Debug.Log ("Death Is Here");
+		HealthUI.current.HealthLost ();
 	}
 
 	IEnumerator returnLater(Rabbit rabbit){
@@ -69,6 +72,7 @@ public class LevelController : MonoBehaviour {
 
 	public void addFruits(int quantity){
 		this.fruits += quantity;
+		fruitsLabel.text = fruits.ToString ();
 	}
 
 	public void addCrystals(int quantity){

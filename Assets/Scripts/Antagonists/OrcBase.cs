@@ -137,7 +137,7 @@ public class OrcBase : MonoBehaviour {
 		this.myBody.isKinematic = true;
 		//Debug.Log("Velocity" + this.myBody.velocity.x);
 		this.GetComponent<BoxCollider2D> ().enabled = false;
-		StartCoroutine (DestroyOrcBody (3.0f));
+		StartCoroutine (DestroyOrcBody (1.0f));
 	}
 
 	IEnumerator DestroyOrcBody(float duration){
