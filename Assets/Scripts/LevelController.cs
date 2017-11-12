@@ -22,8 +22,8 @@ public class LevelController : MonoBehaviour {
 	}
 
 	void Start(){
-		coinsLabel.text = "0000";
-		fruitsLabel.text = "0";
+//		coinsLabel.text = "0000";
+//		fruitsLabel.text = "0";
 	}
 
 
@@ -49,7 +49,6 @@ public class LevelController : MonoBehaviour {
 		StartCoroutine (returnLater (rabbit));
 		rabbitIsDead = true;
 		Debug.Log ("Death Is Here");
-		HealthUI.current.HealthLost ();
 	}
 
 	IEnumerator returnLater(Rabbit rabbit){

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MyButton : MonoBehaviour {
 	public UnityEvent signalOnClick = new UnityEvent();
@@ -9,19 +10,18 @@ public class MyButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playButton.signalOnClick.AddListener (this.onPlay);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		if (playButton != null) {
+			playButton.signalOnClick.AddListener (this.onPlay);
+		}
 	}
 
 	public void onClick(){
 		this.signalOnClick.Invoke ();
+		Debug.Log ("PlayButton");
 	}
 
 	void onPlay(){
+		SceneManager.LoadScene ("ChooseLevel");
 	}
 }
 
