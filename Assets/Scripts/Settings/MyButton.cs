@@ -13,6 +13,12 @@ public class MyButton : MonoBehaviour {
 		if (playButton != null) {
 			playButton.signalOnClick.AddListener (this.onPlay);
 		}
+		if (settingsButton != null) {
+			settingsButton.signalOnClick.AddListener (this.onPlay);
+		}
+		if (pauseButton != null) {
+			pauseButton.signalOnClick.AddListener (this.onPlay);
+		}
 	}
 
 	public void onClick(){

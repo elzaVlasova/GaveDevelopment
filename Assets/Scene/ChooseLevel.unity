@@ -1189,6 +1189,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4938305058059628, guid: d52cc0f97411ba447a822a0ad8e03bcd,
     type: 2}
   m_PrefabInternal: {fileID: 108087603}
+--- !u!4 &616898957 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4768545039620708, guid: 2c80e9384d2fd6d4c8754b18823abc6b,
+    type: 2}
+  m_PrefabInternal: {fileID: 914414743}
 --- !u!1 &699086043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,6 +1428,7 @@ GameObject:
   - component: {fileID: 836258319}
   - component: {fileID: 836258318}
   - component: {fileID: 836258317}
+  - component: {fileID: 836258320}
   m_Layer: 0
   m_Name: DoorLevel1
   m_TagString: Untagged
@@ -1512,6 +1518,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &836258320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 836258316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbdf779fad1c147448cefc825cc2e787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &899433334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,7 +2296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621b0c37a4c99dc4a94908b88b035d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rabbit: {fileID: 0}
+  rabbitTransform: {fileID: 616898957}
 --- !u!1 &1306064362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,7 +2880,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1953617032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -192, y: 133, z: 0}
+  m_LocalPosition: {x: -193, y: 133, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2078598366}
@@ -2900,14 +2917,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 116
+  mWidth: 120
   mHeight: 40
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.9
+  aspectRatio: 3
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -3039,14 +3056,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 96
+  mWidth: 100
   mHeight: 100
   mDepth: 2
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 0.96
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 0cb3697f36327471bb44edce51ece5a8, type: 3}
   mFont: {fileID: 0}
