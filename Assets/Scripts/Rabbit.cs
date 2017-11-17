@@ -70,6 +70,13 @@ public class Rabbit : MonoBehaviour {
 		return isBig;
 	}
 
+	public void OnDeathProcess(){
+		animator.SetBool("die", true);
+		myBody.isKinematic = true;
+		this.GetComponent<BoxCollider2D> ().enabled = false;
+
+	}
+
 	void FixedUpdate() {
 		//Показує силу, з якою користувач натискає на "джойстик"
 		float value = Input.GetAxis("Horizontal");

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeroFollow : MonoBehaviour {
 
-	public Rabbit rabbit;
+	public Transform rabbitTransform;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +15,7 @@ public class HeroFollow : MonoBehaviour {
 
 	void Update () {
 		
-		Transform rabbit_transform = rabbit.transform;
+		Transform rabbit_transform = rabbitTransform;
 		Transform camera_transform = this.transform;
 
 		Vector3 rabbit_position = rabbit_transform.position;

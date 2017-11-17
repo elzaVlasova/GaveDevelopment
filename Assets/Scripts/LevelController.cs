@@ -43,12 +43,16 @@ public class LevelController : MonoBehaviour {
 	}
 
 	public void OnRabbitDeath(Rabbit rabbit){
-		rabbit.GetComponent<Animator> ().SetBool("die", true);
+		/*rabbit.GetComponent<Animator> ().SetBool("die", true);
 		rabbit.GetComponent<Rigidbody2D>().isKinematic = true;
-		rabbit.GetComponent<BoxCollider2D> ().enabled = false;
+		rabbit.GetComponent<BoxCollider2D> ().enabled = false;*/
+		rabbit.OnDeathProcess ();
 		StartCoroutine (returnLater (rabbit));
 		rabbitIsDead = true;
-		Debug.Log ("Death Is Here");
+		if (HealthUI.current != null) {
+			HealthUI.current.HealthLost ();
+		}
+		//Debug.Log ("Death Is Here");
 	}
 
 	IEnumerator returnLater(Rabbit rabbit){
@@ -76,5 +80,6 @@ public class LevelController : MonoBehaviour {
 
 	public void addCrystals(int quantity){
 		this.crystals += quantity;
+
 	}
 }

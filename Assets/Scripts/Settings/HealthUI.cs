@@ -23,7 +23,7 @@ public class HealthUI : MonoBehaviour {
 	public void HealthLost () {
 		healthIcons [currentIndex].sprite2D = usedHealth;
 		currentIndex--;
-		//Debug.Log ("Current index:" + currentIndex);
+		Debug.Log ("Current index:" + currentIndex);
 		if (currentIndex < 0) {
 			LevelController.current.onPauseClick ();
 		}
