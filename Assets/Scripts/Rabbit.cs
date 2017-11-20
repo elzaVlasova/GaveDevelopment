@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Rabbit : MonoBehaviour {
 
+	public AudioClip runClip = null;
+	AudioSource runSourse = null;
+
+	public AudioClip dieClip = null;
+	AudioSource dieSourse = null;
+
 	public static Rabbit lastRabbit = null;
 
 	public float speed = 1;
@@ -32,6 +38,11 @@ public class Rabbit : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		runSourse = gameObject.AddComponent<AudioSource>();
+		runSourse.clip = runClip;
+		dieSourse = gameObject.AddComponent<AudioSource>();
+		dieSourse.clip = dieClip;
+
 		myBody = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator> ();
 		LevelController.current.SetStartPosition(transform.position);
@@ -72,6 +83,7 @@ public class Rabbit : MonoBehaviour {
 
 	public void OnDeathProcess(){
 		animator.SetBool("die", true);
+		dieSourse.Play ();
 		myBody.isKinematic = true;
 		this.GetComponent<BoxCollider2D> ().enabled = false;
 
@@ -88,10 +100,12 @@ public class Rabbit : MonoBehaviour {
 
 
 		if (Mathf.Abs (value) > 0) {
+			runSourse.Play ();
 			Vector2 vel = myBody.velocity;
 			vel.x = speed * value;
 			myBody.velocity = vel;
 			animator.SetBool ("run", true);
+
 		} else {
 			animator.SetBool ("run", false);
 		}

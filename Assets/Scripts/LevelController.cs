@@ -13,6 +13,9 @@ public class LevelController : MonoBehaviour {
 	public UILabel fruitsLabel;
 	public GameObject settingsPrefab;
 
+	public AudioClip music = null;
+	AudioSource musicSourse = null;
+
 	int coins;
 	int fruits;
 	int crystals;
@@ -25,6 +28,12 @@ public class LevelController : MonoBehaviour {
 	void Start(){
 //		coinsLabel.text = "0000";
 //		fruitsLabel.text = "0";
+		musicSourse = gameObject.AddComponent<AudioSource>();
+		musicSourse.clip = music;
+		musicSourse.loop = true;
+		musicSourse.Play ();
+
+
 	}
 
 

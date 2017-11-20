@@ -735,7 +735,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 206752279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 188, y: 136, z: 0}
+  m_LocalPosition: {x: 185, y: 136, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1521500001}
@@ -962,7 +962,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 296243582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -203, y: 136, z: 0}
+  m_LocalPosition: {x: -201, y: 136, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2114758700}
@@ -2542,6 +2542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d694b36a9803d043bf2f6b7cca75104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runClip: {fileID: 8300000, guid: 0d024189a711c440997b2d9f341c8dd0, type: 3}
+  dieClip: {fileID: 8300000, guid: 7553580dee44e4f96b2efa5f4e5e17c3, type: 3}
   speed: 2
   MaxJumpTime: 1
   JumpSpeed: 3
@@ -3081,7 +3083,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1372350941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -108, y: 136, z: 0}
+  m_LocalPosition: {x: -106, y: 136, z: 0}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Children:
   - {fileID: 960098577}
@@ -3681,6 +3683,7 @@ MonoBehaviour:
   fruitsLabel: {fileID: 1132279208}
   settingsPrefab: {fileID: 1347824240455854, guid: 0a349e1dc86b9934fac840e37a0f5675,
     type: 2}
+  music: {fileID: 8300000, guid: 57a5b2120c2d04fa9bcb5b2e99ee9361, type: 3}
 --- !u!212 &1572437605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3758,7 +3761,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1594281264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 98, y: 136, z: 0}
+  m_LocalPosition: {x: 95, y: 136, z: 0}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Children:
   - {fileID: 1159636471}
