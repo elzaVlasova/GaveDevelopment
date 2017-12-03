@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Crystals : Collectable{
+	public AudioClip soundsClip = null;
+	AudioSource soundsSourse = null;
+
 	public Type type;
 
 	public enum Type
@@ -16,5 +19,8 @@ public class Crystals : Collectable{
 		LevelController.current.addCrystals (1);
 		this.CollectedHide();
  	    CrystalsUI.current.putOnPanel (this);
+		soundsSourse = gameObject.AddComponent<AudioSource>();
+		soundsSourse.clip = soundClip;
+		soundsSourse.Play();
 	}
 }

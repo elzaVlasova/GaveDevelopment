@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OrcGreen : MonoBehaviour {
+	public AudioClip attackClip = null;
+	AudioSource attackSourse = null;
+
+	public AudioClip dieClip = null;
+	AudioSource dieSourse = null;
+
 	public Vector3 MoveBy;
 	public float MoveSpeed = 2;
 
@@ -27,6 +33,12 @@ public class OrcGreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		attackSourse = gameObject.AddComponent<AudioSource>();
+		attackSourse.clip = attackClip;
+
+		dieSourse = gameObject.AddComponent<AudioSource>();
+		dieSourse.clip = attackClip;
+
 		myBody = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator> ();
 		myRenderer = this.GetComponent<SpriteRenderer>();
@@ -76,7 +88,7 @@ public class OrcGreen : MonoBehaviour {
 
 		if (rabbit_position.x > pointLeft && rabbit_position.x < pointRight) {
 			mode = Mode.Attack;
-			//Debug.Log ("Mode attack" );
+			Debug.Log ("Mode attack" );
 		}
 
 		if (shouldPatrolAb()) {
@@ -126,6 +138,7 @@ public class OrcGreen : MonoBehaviour {
 		Debug.Log ("On orc death");
 		isDead = true;
 		this.animator.SetBool("die", true);
+		dieSourse.Play ();
 		this.myBody.isKinematic = true;
 		this.GetComponent<BoxCollider2D> ().enabled = false;
 		StartCoroutine (DestroyOrcBody (1.0f));
@@ -144,8 +157,10 @@ public class OrcGreen : MonoBehaviour {
 
 	void AttackRabbit(Rabbit rabbit){
 		this.animator.SetTrigger ("attack");
+		attackSourse.Play();
 
 		LevelController.current.OnRabbitDeath(rabbit);
+		mode = Mode.GoToA;
 	}
 
 	void OnCollideWithRabbit(Rabbit rabbit){

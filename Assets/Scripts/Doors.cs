@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Doors : MonoBehaviour {
 
+	public Scenario scenario;
+
+	public enum Scenario
+	{
+		ToLevel1, ToLevel2, ToMenu
+
+	}
+
 	public Scene nextScene;
 
 	// Use this for initialization
@@ -19,10 +27,21 @@ public class Doors : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider){
 		//if (!this.hideAnimation) {
-		//Debug.Log ("Coins trigger enter");
+		Debug.Log ("Trigger enter");
 		Rabbit rabbit = collider.GetComponent<Rabbit>();
 		if(rabbit != null) {
-			SceneManager.LoadScene ("Level1");
+			switch (scenario) {
+			case Scenario.ToLevel1:
+				SceneManager.LoadScene ("Level1");
+				break;
+			case Scenario.ToLevel2:
+				SceneManager.LoadScene ("New Scene");
+				break;
+			case Scenario.ToMenu:
+				LevelController.current.winWindow.SetActive (true);
+				Debug.Log ("On Win Popup");
+				break;
+			}
 
 		}
 

@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour {
+	public AudioClip soundClip = null;
+	AudioSource soundSourse = null;
+
 
 	protected virtual void OnRabitHit (Rabbit rabbit){
+	}
+
+	void Start(){
+		soundSourse = gameObject.AddComponent<AudioSource>();
+		soundSourse.clip = soundClip;
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
@@ -18,7 +26,9 @@ public class Collectable : MonoBehaviour {
 		//}
 	}
 	public void CollectedHide() {
+		
 		Destroy(this.gameObject);
+		soundSourse.Play();
 		}
 	}
 

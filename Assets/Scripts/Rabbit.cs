@@ -85,7 +85,6 @@ public class Rabbit : MonoBehaviour {
 		animator.SetBool("die", true);
 		dieSourse.Play ();
 		myBody.isKinematic = true;
-		this.GetComponent<BoxCollider2D> ().enabled = false;
 
 	}
 
@@ -100,13 +99,13 @@ public class Rabbit : MonoBehaviour {
 
 
 		if (Mathf.Abs (value) > 0) {
-			runSourse.Play ();
 			Vector2 vel = myBody.velocity;
 			vel.x = speed * value;
 			myBody.velocity = vel;
 			animator.SetBool ("run", true);
 
 		} else {
+			runSourse.Play ();
 			animator.SetBool ("run", false);
 		}
 
