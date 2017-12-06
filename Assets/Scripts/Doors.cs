@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Doors : MonoBehaviour {
-
+	
+	public GameObject winWindow;
 	public Scenario scenario;
 
 	public enum Scenario
@@ -38,8 +39,11 @@ public class Doors : MonoBehaviour {
 				SceneManager.LoadScene ("New Scene");
 				break;
 			case Scenario.ToMenu:
-				LevelController.current.winWindow.SetActive (true);
-				Debug.Log ("On Win Popup");
+				//winWindow.SetActive (true);
+				LevelController.current.onWinPopup(winWindow);
+				GameStats.SetSecondLevelOpen (true);
+				GameStats.level1.levelPassed = true;
+				Debug.Log ("Second level opened");
 				break;
 			}
 

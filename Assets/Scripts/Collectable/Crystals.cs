@@ -16,7 +16,7 @@ public class Crystals : Collectable{
 
 
 	protected override void OnRabitHit (Rabbit rabit){
-		LevelController.current.addCrystals (1);
+		LevelController.current.addCrystals (this.type);
 		this.CollectedHide();
  	    CrystalsUI.current.putOnPanel (this);
 		soundsSourse = gameObject.AddComponent<AudioSource>();

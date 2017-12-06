@@ -30,6 +30,8 @@ public class LevelController : MonoBehaviour {
 	int crystals;
 	int rabbitLifes;
 
+	private List <Crystals.Type> crystalsCollected;
+
 
 	void Awake(){
 		current = this;
@@ -50,8 +52,9 @@ public class LevelController : MonoBehaviour {
 		winMusicSourse = gameObject.AddComponent<AudioSource>();
 		winMusicSourse.clip = winMusic;
 
+		crystalsCollected = new List <Crystals.Type>();
 		rabbitLifes = 3;
-		winnerWindow.SetActive (true);
+        //winnerWindow.SetActive (true);
 		//looseWindow.SetActive (true);
 	}
 
@@ -84,10 +87,13 @@ public class LevelController : MonoBehaviour {
 	}
 
 
-	public void onWinPopup(){
-		winWindow.SetActive (true);
+	public void onWinPopup(GameObject winWindow){
+		this.winWindow = winWindow;
+		SettingsWinWindow ();
 		winMusicSourse.Play ();
-		Debug.Log ("Active");
+		winWindow.SetActive (true);
+		Debug.Log (crystalsCollected);
+		GameStats.AddCoins (coins);
 	}
 
 	public void SetStartPosition(Vector3 position){
@@ -140,8 +146,28 @@ public class LevelController : MonoBehaviour {
 		fruitsLabel.text = fruits.ToString ();
 	}
 
-	public void addCrystals(int quantity){
-		this.crystals += quantity;
-
+	public void addCrystals(Crystals.Type type){
+		crystalsCollected.Add (type);
 	}
+
+
+	private void SettingsWinWindow()
+	{
+		WinWindowSprites winSprites = winWindow.GetComponent<WinWindowSprites>();
+		if (crystalsCollected.Contains(Crystals.Type.BLUE))
+		{
+			winSprites.BlueEmpty.sprite2D = winSprites.BlueCrystalSprite;
+		}
+		if (crystalsCollected.Contains(Crystals.Type.RED))
+		{
+			winSprites.RedEmpty.sprite2D = winSprites.RedCrystalSprite;
+		}
+		if (crystalsCollected.Contains(Crystals.Type.GREEN))
+		{
+			winSprites.GreenEmpty.sprite2D = winSprites.GreenCrystalSprite;
+		}
+		winSprites.coinsLabel.text = "+" + coins.ToString();
+		winSprites.fruitsLabel.text = fruits.ToString();
+	}
+
 }

@@ -117,7 +117,7 @@ public abstract class Orc : MonoBehaviour
 	}
 	protected bool RabbitIsNear()
 	{
-		rabbit_pos = LevelController.current.transform.position;
+		rabbit_pos = Rabbit.lastRabbit.transform.position;
 		return rabbit_pos.x >= pointA.x && rabbit_pos.x <= pointB.x;
 	}
 
