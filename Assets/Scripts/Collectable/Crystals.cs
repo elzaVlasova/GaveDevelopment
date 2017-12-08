@@ -19,8 +19,5 @@ public class Crystals : Collectable{
 		LevelController.current.addCrystals (this.type);
 		this.CollectedHide();
  	    CrystalsUI.current.putOnPanel (this);
-		soundsSourse = gameObject.AddComponent<AudioSource>();
-		soundsSourse.clip = soundClip;
-		soundsSourse.Play();
 	}
 }

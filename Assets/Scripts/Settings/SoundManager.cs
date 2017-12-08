@@ -9,7 +9,7 @@ public class SoundManager{
 
 
 	public bool IsSoundOn(){
-		return is_sound_on;
+		return this.is_sound_on;
 	}
 
 	public void setSoundOn(bool val){

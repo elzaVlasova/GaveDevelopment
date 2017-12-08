@@ -26,6 +26,15 @@ public class LevelController : MonoBehaviour {
 	public AudioClip winMusic = null;
 	AudioSource winMusicSourse = null;
 
+	public AudioClip coinsSound = null;
+	AudioSource coinsSoundSourse = null;
+
+	public AudioClip crystalsSound = null;
+	AudioSource crystalsSoundSourse = null;
+
+	public AudioClip healthSound = null;
+	AudioSource healthSoundSourse = null;
+
 	int coins;
 	int fruits;
 	int crystals;
@@ -53,6 +62,15 @@ public class LevelController : MonoBehaviour {
 
 		winMusicSourse = gameObject.AddComponent<AudioSource>();
 		winMusicSourse.clip = winMusic;
+
+		coinsSoundSourse = gameObject.AddComponent<AudioSource>();
+		coinsSoundSourse.clip = coinsSound;
+
+		crystalsSoundSourse = gameObject.AddComponent<AudioSource>();
+		crystalsSoundSourse.clip = crystalsSound;
+
+		healthSoundSourse = gameObject.AddComponent<AudioSource>();
+		healthSoundSourse.clip = healthSound;
 
 		crystalsCollected = new List <Crystals.Type>();
 		fruitsCollected = new List <Fruits.Type>();
@@ -103,9 +121,9 @@ public class LevelController : MonoBehaviour {
 	public void onWinPopup(GameObject winWindow, int level){
 		this.winWindow = winWindow;
 		SettingsWinWindow ();
-		if (SoundManager.Instanse.IsSoundOn ()) {
+		//if (SoundManager.Instanse.IsSoundOn ()) {
 			winMusicSourse.Play ();
-		}
+		//}
 		winWindow.SetActive (true);
 		GameStats.AddCoins (coins);
 		if (crystalsCollected.Count == 3) {
@@ -162,7 +180,9 @@ public class LevelController : MonoBehaviour {
 	public void addCoins(int quantity){
 		this.coins += quantity;
 		coinsLabel.text = coins.ToString ("0000");
-
+		if (SoundManager.Instanse.IsSoundOn ()) {
+			coinsSoundSourse.Play ();
+		}
 	}
 
 	public void addFruits(Fruits.Type type){
@@ -174,12 +194,18 @@ public class LevelController : MonoBehaviour {
 	public void addCrystals(Crystals.Type type){
 		crystalsCollected.Add (type);
 		Debug.Log ("Crystal collected count" + crystalsCollected.Count);
+		if (SoundManager.Instanse.IsSoundOn ()) {
+			crystalsSoundSourse.Play ();
+		}
 	}
 
 	public void addHealth(){
 		if(rabbitLifes<3){
 			this.rabbitLifes++;
 			HealthUI.current.HealthTaken ();
+		}
+		if (SoundManager.Instanse.IsSoundOn ()) {
+			healthSoundSourse.Play ();
 		}
 	}
 

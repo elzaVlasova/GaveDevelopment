@@ -10,6 +10,9 @@ public class Rabbit : MonoBehaviour {
 	public AudioClip dieClip = null;
 	AudioSource dieSourse = null;
 
+	public AudioClip jumpPlatformClip = null;
+	AudioSource jumpPlatformSourse = null;
+
 	public static Rabbit lastRabbit = null;
 
 	public float speed = 1;
@@ -40,8 +43,12 @@ public class Rabbit : MonoBehaviour {
 	void Start () {
 		runSourse = gameObject.AddComponent<AudioSource>();
 		runSourse.clip = runClip;
+
 		dieSourse = gameObject.AddComponent<AudioSource>();
 		dieSourse.clip = dieClip;
+
+		jumpPlatformSourse = gameObject.AddComponent<AudioSource>();
+		jumpPlatformSourse.clip = jumpPlatformClip;
 
 		myBody = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator> ();
@@ -143,6 +150,9 @@ public class Rabbit : MonoBehaviour {
 
 		if (hit.transform != null && hit.transform.GetComponent<MovingPlatform> () != null) {
 			SetNewParent (this.transform, hit.transform);
+			if (SoundManager.Instanse.IsMusicOn ()) {
+				jumpPlatformSourse.Play ();
+			}
 		} else {
 			SetNewParent (this.transform, this.heroParent);
 		}

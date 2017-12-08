@@ -55,15 +55,18 @@ MonoBehaviour:
   rabbitIsDead: 0
   coinsLabel: {fileID: 0}
   fruitsLabel: {fileID: 0}
-  settingsPrefab: {fileID: 1347824240455854, guid: 0a349e1dc86b9934fac840e37a0f5675,
-    type: 2}
+  settingsPrefab: {fileID: 0}
   looseWindow: {fileID: 0}
   winnerWindow: {fileID: 1339591802017212, guid: 5edb305dfea3149478daf4cc47d2c032,
     type: 2}
   winWindow: {fileID: 1339591802017212, guid: 5edb305dfea3149478daf4cc47d2c032, type: 2}
+  settingdWindow: {fileID: 0}
   music: {fileID: 8300000, guid: 57a5b2120c2d04fa9bcb5b2e99ee9361, type: 3}
   looseMusic: {fileID: 8300000, guid: 98a18c22aef5542858a6eaf886ac253a, type: 3}
   winMusic: {fileID: 8300000, guid: dee792aa118e04f4f93fb651e2693ac9, type: 3}
+  coinsSound: {fileID: 8300000, guid: d07c1afb94cf04c50a369bdf0faaf7cf, type: 3}
+  crystalsSound: {fileID: 8300000, guid: 1efea67b8444d4802941941e49c70cc0, type: 3}
+  healthSound: {fileID: 8300000, guid: a1871116ead2c4d23a1570e79b94efed, type: 3}
 --- !u!212 &212656959475633196
 SpriteRenderer:
   m_ObjectHideFlags: 1
