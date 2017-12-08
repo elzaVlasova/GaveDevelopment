@@ -83,7 +83,7 @@ public class Rabbit : MonoBehaviour {
 
 	public void OnDeathProcess(){
 		animator.SetBool("die", true);
-		dieSourse.Play ();
+		if (SoundManager.Instanse.IsSoundOn()){dieSourse.Play ();}
 		myBody.isKinematic = true;
 
 	}
@@ -105,7 +105,9 @@ public class Rabbit : MonoBehaviour {
 			animator.SetBool ("run", true);
 
 		} else {
-			runSourse.Play ();
+			if (SoundManager.Instanse.IsSoundOn ()) {
+				runSourse.Play ();
+			}
 			animator.SetBool ("run", false);
 		}
 

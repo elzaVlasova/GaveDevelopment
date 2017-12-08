@@ -86,10 +86,12 @@ public class OrcGreen : MonoBehaviour {
 		Debug.Log("Left Point:" + pointLeft + "; Right Point" + pointRight);
 		 
 
-		if (rabbit_position.x > pointLeft && rabbit_position.x < pointRight) {
+		if (rabbit_position.x > pointLeft && rabbit_position.x < pointRight && rabbit_position.y - this.transform.position.y < 1) {
 			mode = Mode.Attack;
 			Debug.Log ("Mode attack" );
 		}
+
+
 
 		if (shouldPatrolAb()) {
 			if(mode == Mode.GoToA && isArrived(position, this.pointA)){

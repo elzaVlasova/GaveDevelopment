@@ -25,17 +25,18 @@ public class DoorStatistcs : MonoBehaviour {
 
 
 	void Start(){
-		if (this.level == 1 && GameStats.level1.levelPassed) {
+		if (this.level == 1 && GameStats.level1.levelPassed || this.level == 2 && GameStats.level2.levelPassed) {
 			complited.SetActive (true);
 		}else {complited.SetActive (false);}
 		//levelStatistic
 		if (levelStatistics.levelPassed) {
 			complited.SetActive (true);
 		}
-		if (levelStatistics.hasAllCrystals) {
+		if (this.level == 1 && GameStats.level1.hasAllCrystals) {
+			Debug.Log ("Crystals Sprite");
 			shadowCrystals.sprite = crystalSprite;
 		}
-		if (levelStatistics.hasAllFruits){
+		if (this.level == 1 && GameStats.level1.hasAllFruits || this.level == 2 && GameStats.level2.hasAllFruits){
 			shadowFruit.sprite = fruitSprite;
 		}
 		if (level == 2 && GameStats.IsSecondLevelOpened()) {

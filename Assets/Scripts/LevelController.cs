@@ -15,6 +15,7 @@ public class LevelController : MonoBehaviour {
 	public GameObject looseWindow;
 	public GameObject winnerWindow;
 	public GameObject winWindow;
+	public GameObject settingdWindow;
 
 	public AudioClip music = null;
 	AudioSource musicSourse = null;
@@ -31,6 +32,7 @@ public class LevelController : MonoBehaviour {
 	int rabbitLifes;
 
 	private List <Crystals.Type> crystalsCollected;
+	private List <Fruits.Type> fruitsCollected;
 
 
 	void Awake(){
@@ -53,17 +55,26 @@ public class LevelController : MonoBehaviour {
 		winMusicSourse.clip = winMusic;
 
 		crystalsCollected = new List <Crystals.Type>();
+		fruitsCollected = new List <Fruits.Type>();
 		rabbitLifes = 3;
         //winnerWindow.SetActive (true);
 		//looseWindow.SetActive (true);
 	}
 
 
+	public void musicSetting(bool is_music_on){
+		if (is_music_on) {
+			musicSourse.Play ();
+		} else { musicSourse.Stop ();
+		}
+	}
+
 
 	public void onPauseClick(){
-		GameObject parent = UICamera.first.transform.parent.gameObject;
-		GameObject obj = NGUITools.AddChild(parent, settingsPrefab);
-		Setting popup = obj.GetComponent<Setting>();
+		//GameObject parent = UICamera.first.transform.parent.gameObject;
+		//GameObject obj = NGUITools.AddChild(parent, settingsPrefab);
+		//Setting popup = obj.GetComponent<Setting>();
+		settingdWindow.SetActive(true);
 	}
 
 	public void onPlayClick(){
@@ -83,17 +94,30 @@ public class LevelController : MonoBehaviour {
 
 	public void onLoosePopup(){
 		looseWindow.SetActive (true);
-		looseMusicSourse.Play ();
+		if (SoundManager.Instanse.IsSoundOn ()) {
+			looseMusicSourse.Play ();
+		}
 	}
 
 
-	public void onWinPopup(GameObject winWindow){
+	public void onWinPopup(GameObject winWindow, int level){
 		this.winWindow = winWindow;
 		SettingsWinWindow ();
-		winMusicSourse.Play ();
+		if (SoundManager.Instanse.IsSoundOn ()) {
+			winMusicSourse.Play ();
+		}
 		winWindow.SetActive (true);
-		Debug.Log (crystalsCollected);
 		GameStats.AddCoins (coins);
+		if (crystalsCollected.Count == 3) {
+			Debug.Log ("Capacity " + crystalsCollected.Count);
+			if(level ==1){GameStats.level1.hasAllCrystals = true;}
+			if(level ==2){GameStats.level2.hasAllCrystals = true;}
+		}
+		if (fruitsCollected.Count == 1) {
+			Debug.Log ("Capacity " + fruitsCollected.Count);
+			if(level ==1){GameStats.level1.hasAllFruits = true;}
+			if(level ==2){GameStats.level2.hasAllFruits = true;}
+		}
 	}
 
 	public void SetStartPosition(Vector3 position){
@@ -141,15 +165,23 @@ public class LevelController : MonoBehaviour {
 
 	}
 
-	public void addFruits(int quantity){
-		this.fruits += quantity;
+	public void addFruits(Fruits.Type type){
+		this.fruits ++;
+		fruitsCollected.Add (type);
 		fruitsLabel.text = fruits.ToString ();
 	}
 
 	public void addCrystals(Crystals.Type type){
 		crystalsCollected.Add (type);
+		Debug.Log ("Crystal collected count" + crystalsCollected.Count);
 	}
 
+	public void addHealth(){
+		if(rabbitLifes<3){
+			this.rabbitLifes++;
+			HealthUI.current.HealthTaken ();
+		}
+	}
 
 	private void SettingsWinWindow()
 	{

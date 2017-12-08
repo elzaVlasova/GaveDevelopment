@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Doors : MonoBehaviour {
+
+	public int level;
 	
 	public GameObject winWindow;
 	public Scenario scenario;
@@ -28,7 +30,6 @@ public class Doors : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider){
 		//if (!this.hideAnimation) {
-		Debug.Log ("Trigger enter");
 		Rabbit rabbit = collider.GetComponent<Rabbit>();
 		if(rabbit != null) {
 			switch (scenario) {
@@ -40,10 +41,9 @@ public class Doors : MonoBehaviour {
 				break;
 			case Scenario.ToMenu:
 				//winWindow.SetActive (true);
-				LevelController.current.onWinPopup(winWindow);
+				LevelController.current.onWinPopup(winWindow, level);
 				GameStats.SetSecondLevelOpen (true);
 				GameStats.level1.levelPassed = true;
-				Debug.Log ("Second level opened");
 				break;
 			}
 

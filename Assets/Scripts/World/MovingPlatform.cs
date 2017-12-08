@@ -52,7 +52,7 @@ public class MovingPlatform : MonoBehaviour {
 		if (IsArrived(my_pos, target)) {
 			//Debug.Log ("Wait" + wait);
 			//Debug.Log ("Is arrived" + going_to_a);
-			this.wait = 3;
+			this.wait = 1.5f;
 			going_to_a = !going_to_a;
 			move = new Vector3(0, 0, 0);
 			//Debug.Log ("We changed the direction");

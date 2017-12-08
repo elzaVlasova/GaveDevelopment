@@ -30,8 +30,8 @@ public class SoundManager{
 
 
 	void Start(){
-		is_sound_on = PlayerPrefs.GetInt ("sound", 1) == 1;
-		is_music_on = PlayerPrefs.GetInt ("music", 1) == 1;
+		//is_sound_on = PlayerPrefs.GetInt ("sound", 1) == 1;
+		//is_music_on = PlayerPrefs.GetInt ("music", 1) == 1;
 	}
 
 	public void onSoundClick() {

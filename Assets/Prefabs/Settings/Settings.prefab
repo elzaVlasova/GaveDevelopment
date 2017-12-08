@@ -45,7 +45,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1350790152729434
 GameObject:
   m_ObjectHideFlags: 1
@@ -399,7 +399,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 114597571787432654}
+    mMethodName: onMusicClick
+    mParameters: []
+    oneShot: 0
 --- !u!114 &114185430341219436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -624,7 +628,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 114597571787432654}
+    mMethodName: onSoundClick
+    mParameters: []
+    oneShot: 0
 --- !u!114 &114547041475486066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -665,6 +673,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5405dd5e137aade4e88d7e300c73b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundOnSprite: {fileID: 21300000, guid: 9d51c550af7f042448b0d69bc8f39958, type: 3}
+  soundOffSprite: {fileID: 21300000, guid: a96b3c306d8f54d59992608610fa8420, type: 3}
+  musicOnSprite: {fileID: 21300000, guid: f0cf33b7ce34e41798c3899a84839cbd, type: 3}
+  musicOffSprite: {fileID: 21300000, guid: 05d63ac62d0544d53a2005d0ceb838ea, type: 3}
+  soundButton: {fileID: 1725375266044060}
+  musicButton: {fileID: 1350790152729434}
 --- !u!114 &114604376968711166
 MonoBehaviour:
   m_ObjectHideFlags: 1

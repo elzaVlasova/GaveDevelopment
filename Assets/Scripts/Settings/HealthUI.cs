@@ -31,6 +31,12 @@ public class HealthUI : MonoBehaviour {
 		}
 	}
 
+	public void HealthTaken () {
+		currentIndex++;
+		healthIcons [currentIndex].sprite2D = unusedHealth;
+	}
+
+
 	public void RenewPanel() {
 		for (int i = 3; i > 0; i--) {
 			healthIcons [currentIndex].sprite2D = unusedHealth;
