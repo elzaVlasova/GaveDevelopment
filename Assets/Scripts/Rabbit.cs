@@ -150,11 +150,12 @@ public class Rabbit : MonoBehaviour {
 
 		if (hit.transform != null && hit.transform.GetComponent<MovingPlatform> () != null) {
 			SetNewParent (this.transform, hit.transform);
-			if (SoundManager.Instanse.IsMusicOn ()) {
 				jumpPlatformSourse.Play ();
-			}
+
 		} else {
-			SetNewParent (this.transform, this.heroParent);
+			if (SoundManager.Instanse.IsMusicOn ()) {
+				SetNewParent (this.transform, this.heroParent);
+			}
 		}
 
 		Debug.DrawLine (from, to, Color.red);

@@ -131,7 +131,7 @@ public class LevelController : MonoBehaviour {
 			if(level ==1){GameStats.level1.hasAllCrystals = true;}
 			if(level ==2){GameStats.level2.hasAllCrystals = true;}
 		}
-		if (fruitsCollected.Count == 1) {
+		if (fruitsCollected.Count == 10) {
 			Debug.Log ("Capacity " + fruitsCollected.Count);
 			if(level ==1){GameStats.level1.hasAllFruits = true;}
 			if(level ==2){GameStats.level2.hasAllFruits = true;}

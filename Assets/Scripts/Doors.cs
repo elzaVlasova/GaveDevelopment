@@ -12,7 +12,7 @@ public class Doors : MonoBehaviour {
 
 	public enum Scenario
 	{
-		ToLevel1, ToLevel2, ToMenu
+		ToLevel1, ToLevel2, ToMenuLevel1, ToMenuLevel2
 
 	}
 
@@ -37,13 +37,17 @@ public class Doors : MonoBehaviour {
 				SceneManager.LoadScene ("Level1");
 				break;
 			case Scenario.ToLevel2:
-				SceneManager.LoadScene ("New Scene");
+				SceneManager.LoadScene ("Level2");
 				break;
-			case Scenario.ToMenu:
+			case Scenario.ToMenuLevel1:
 				//winWindow.SetActive (true);
-				LevelController.current.onWinPopup(winWindow, level);
+				LevelController.current.onWinPopup(winWindow, 1);
 				GameStats.SetSecondLevelOpen (true);
 				GameStats.level1.levelPassed = true;
+				break;
+			case Scenario.ToMenuLevel2:
+				LevelController.current.onWinPopup(winWindow, 2);
+				GameStats.level2.levelPassed = true;
 				break;
 			}
 
