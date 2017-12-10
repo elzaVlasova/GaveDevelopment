@@ -82,17 +82,23 @@ public class LevelController : MonoBehaviour {
 		fruitsCollected = new List <Fruits.Type>();
 		rabbitLifes = 3;
 		musicSetting (SoundManager.IsMusicOn);
+		soundSetting (SoundManager.IsSoundOn);
         //winnerWindow.SetActive (true);
 		//looseWindow.SetActive (true);
 	}
 
 
 	public void musicSetting(bool is_music_on){
-		Debug.Log ("SET MUSIC : " + is_music_on);
+		Debug.Log ("Set sound : " + is_music_on);
 		if (is_music_on) {
 			musicSourse.Play ();
 		} else { musicSourse.Stop ();
 		}
+	}
+
+	public void soundSetting(bool is_sound_on){
+		Debug.Log ("Set sound : " + is_sound_on);
+		SoundManager.IsSoundOn = is_sound_on;
 	}
 
 

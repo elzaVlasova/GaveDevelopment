@@ -135,9 +135,13 @@ public class Rabbit : MonoBehaviour {
 		}
 
 
-		// Не розумію чому
-		Vector3 from = transform.position + Vector3.up * 0.3f;
-		Vector3 to = transform.position + Vector3.down * 0.3f;
+		float coef = 0.3f;
+		if (this.isBig) {
+			coef = 0.6f;
+		}
+
+		Vector3 from = transform.position + Vector3.up * coef;
+		Vector3 to = transform.position + Vector3.down * coef;
 		int layer_id = 1 << LayerMask.NameToLayer ("Ground");
 
 		RaycastHit2D hit = Physics2D.Linecast (from, to, layer_id);

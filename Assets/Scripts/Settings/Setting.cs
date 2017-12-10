@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Setting : MonoBehaviour {
 
-	public GameObject soundButtonOn, musicButtonOn, soundButtonOff, musicButtonOff;
+	public GameObject soundButtonOn;
+	public GameObject musicButtonOn;
+	public GameObject soundButtonOff; 
+	public GameObject musicButtonOff;
 
 
 	public void onCloseClick(){

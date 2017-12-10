@@ -26,6 +26,7 @@ public class OrcBase : MonoBehaviour {
 	SpriteRenderer myRenderer = null;
 	public Animator animator = null;
 	public float shootTime;
+	public int additionalDistanse = 2;
 
 	private Coroutine launchCarrotCoroutine;
 	public enum Mode{GoToA,GoToB,Attack}
@@ -41,7 +42,7 @@ public class OrcBase : MonoBehaviour {
 		pointA = this.transform.position;
 		pointB = pointA + MoveBy;
 
-		Debug.Log ("Point A: " + pointA + "; Point B:" + pointB);
+		//Debug.Log ("Point A: " + pointA + "; Point B:" + pointB);
 		//launchCarrot (1);
 
 	}
@@ -79,7 +80,7 @@ public class OrcBase : MonoBehaviour {
 		// 1. Task
 		Vector3 rabbit_position = Rabbit.lastRabbit.transform.position;
 
-		if (rabbit_position.x > Mathf.Min (pointA.x, pointB.x) && rabbit_position.y < Mathf.Max (pointA.x, pointB.x)) {
+		if (rabbit_position.x > Mathf.Min (pointA.x, pointB.x) -additionalDistanse && rabbit_position.y < Mathf.Max (pointA.x, pointB.x)+additionalDistanse && rabbit_position.y-this.transform.position.y<1) {
 			mode = Mode.Attack;
 		} else if (mode == Mode.Attack){
 			mode = Mode.GoToB;
