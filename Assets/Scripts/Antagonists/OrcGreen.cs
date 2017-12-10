@@ -89,6 +89,9 @@ public class OrcGreen : MonoBehaviour {
 		if (rabbit_position.x > pointLeft && rabbit_position.x < pointRight && rabbit_position.y - this.transform.position.y < 1) {
 			mode = Mode.Attack;
 			Debug.Log ("Mode attack" );
+			if (LevelController.current.rabbitIsDead) {
+				mode = Mode.GoToA;
+			}
 		}
 
 

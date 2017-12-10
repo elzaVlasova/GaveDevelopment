@@ -120,7 +120,7 @@ public class LevelController : MonoBehaviour {
 	}
 
 	public void onReplayClickLevel2(){
-		SceneManager.LoadScene ("New Scene");
+		SceneManager.LoadScene ("Level2");
 		rabbitLifes = 3;
 	}
 
@@ -135,9 +135,9 @@ public class LevelController : MonoBehaviour {
 	public void onWinPopup(GameObject winWindow, int level){
 		this.winWindow = winWindow;
 		SettingsWinWindow ();
-		//if (SoundManager.Instanse.IsSoundOn ()) {
+		if (SoundManager.IsSoundOn) {
 			winMusicSourse.Play ();
-		//}
+		}
 		winWindow.SetActive (true);
 		GameStats.AddCoins (coins);
 		if (crystalsCollected.Count == 3) {

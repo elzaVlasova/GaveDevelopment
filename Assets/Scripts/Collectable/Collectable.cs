@@ -19,12 +19,12 @@ public class Collectable : MonoBehaviour {
 		//if (!this.hideAnimation) {
 		//Debug.Log ("Coins trigger enter");
 			Rabbit rabbit = collider.GetComponent<Rabbit>();
-		if (SoundManager.IsSoundOn) {
-// 				soundSourse.Play ();
-		}
+
 			if(rabbit != null) {
 				this.OnRabitHit (rabbit);
-
+			if (SoundManager.IsSoundOn) {
+				soundSourse.Play ();
+			}
 			}
 		//}
 	}
