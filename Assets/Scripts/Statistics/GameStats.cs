@@ -43,6 +43,11 @@ public class GameStats : MonoBehaviour {
 		return result;
 	}
 
+	public void lalala(){
+		GetLevelStatistics (1.ToString ());
+	
+	}
+
 	public static void SetLevelData(string LevelName, LevelStatistics stat)
 	{
 		string str = JsonUtility.ToJson(stat);

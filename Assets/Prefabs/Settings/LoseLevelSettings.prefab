@@ -59,7 +59,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1398349967949060
 GameObject:
   m_ObjectHideFlags: 1
@@ -1011,6 +1011,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5405dd5e137aade4e88d7e300c73b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundButtonOn: {fileID: 0}
+  musicButtonOn: {fileID: 0}
+  soundButtonOff: {fileID: 0}
+  musicButtonOff: {fileID: 0}
 --- !u!114 &114694714579421570
 MonoBehaviour:
   m_ObjectHideFlags: 1

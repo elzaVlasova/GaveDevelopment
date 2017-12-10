@@ -3,43 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Setting : MonoBehaviour {
-	bool is_sound_on = true;
-	bool is_music_on = true;
 
-	//public Sprite soundOnSprite, soundOffSprite, musicOnSprite, musicOffSprite;
-	//public GameObject soundButton, musicButton;
+	public GameObject soundButtonOn, musicButtonOn, soundButtonOff, musicButtonOff;
 
-	void Start(){
-		is_sound_on = PlayerPrefs.GetInt("sound", 1) == 1;
-		SoundManager.Instanse.setSoundOn (is_sound_on);
-		is_music_on = PlayerPrefs.GetInt("music", 1) == 1;
-		SoundManager.Instanse.setMusicOn (is_music_on);
-	}
-
-	void Update(){
-
-	}
 
 	public void onCloseClick(){
 		//Destroy (this.gameObject);
 		this.gameObject.SetActive(false);
 	}
 
-	public void onSoundClick() {
-		is_sound_on = !is_sound_on ;
-		SoundManager.Instanse.setSoundOn(is_sound_on);
-
-		//UI2DSprite sprite = soundButton.GetComponent<UI2DSprite>();
-		//sprite.sprite2D = is_sound_on? soundOnSprite:soundOffSprite;
+	void Start()
+	{
+		ToggleSoundButton ();
+		ToggleMusicButton ();
 	}
 
+	public void onSoundClick() {
+		SoundManager.IsSoundOn = !SoundManager.IsSoundOn;
+		ToggleSoundButton ();
+	}
+
+	private void ToggleSoundButton()
+	{
+		soundButtonOn.SetActive (SoundManager.IsSoundOn);
+		soundButtonOff.SetActive (!SoundManager.IsSoundOn);
+	}
+
+	private void ToggleMusicButton()
+	{
+		musicButtonOn.SetActive (SoundManager.IsMusicOn);
+		musicButtonOff.SetActive (!SoundManager.IsMusicOn);
+	}
+
+
 	public void onMusicClick() {
-		is_music_on = !is_music_on;
-		LevelController.current.musicSetting(is_music_on);
-
-
-		//UI2DSprite sprite = musicButton.GetComponent<UI2DSprite>();
-		//sprite.sprite2D = is_music_on ? musicOnSprite : musicOffSprite;
+		SoundManager.IsMusicOn = !SoundManager.IsMusicOn;
+		LevelController.current.musicSetting(SoundManager.IsMusicOn);
+		ToggleMusicButton ();
 	}
 }
 

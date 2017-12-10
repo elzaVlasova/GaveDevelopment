@@ -12,7 +12,9 @@ public class Weapon : Collectable {
 	}
 		
 	protected override void OnRabitHit(Rabbit rabbit){
-		LevelController.current.OnRabbitDeath(rabbit);
+		if (!LevelController.current.rabbitIsDead) {
+			LevelController.current.OnRabbitDeath (rabbit);
+		}
 		CollectedHide ();
 	}
 

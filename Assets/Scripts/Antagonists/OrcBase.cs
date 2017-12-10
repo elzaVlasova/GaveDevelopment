@@ -27,6 +27,7 @@ public class OrcBase : MonoBehaviour {
 	public Animator animator = null;
 	public float shootTime;
 
+	private Coroutine launchCarrotCoroutine;
 	public enum Mode{GoToA,GoToB,Attack}
 
 
@@ -80,7 +81,8 @@ public class OrcBase : MonoBehaviour {
 
 		if (rabbit_position.x > Mathf.Min (pointA.x, pointB.x) && rabbit_position.y < Mathf.Max (pointA.x, pointB.x)) {
 			mode = Mode.Attack;
-			Debug.Log ("Mode attack" );
+		} else if (mode == Mode.Attack){
+			mode = Mode.GoToB;
 		}
 
 		if (shouldPatrolAb()) {
@@ -154,7 +156,6 @@ public class OrcBase : MonoBehaviour {
 
 
 	void AttackRabbit(Rabbit rabbit, float attackDirection){
-		this.animator.SetTrigger ("attack");
 
 
 
@@ -162,18 +163,18 @@ public class OrcBase : MonoBehaviour {
 			myRenderer.flipX = true;
 		} else { myRenderer.flipX = false;
 		}
-
-		shootTime = -Time.deltaTime;
-		if (shootTime <= 0) {
-		 launchCarrot(attackDirection * (-1));
-
+		Debug.Log ("attack");
+		if (launchCarrotCoroutine == null && !LevelController.current.rabbitIsDead) {
+			this.animator.SetTrigger ("attack");
+		
+			launchCarrotCoroutine = StartCoroutine (launchCarrot (attackDirection * (-1)));
 		}
-		//LevelController.current.OnRabbitDeath(rabbit);
 	}
+		//LevelController.current.OnRabbitDeath(rabbit);
+
 		
 
 	void OnCollideWithRabbit(Rabbit rabbit){
-		Debug.Log ("Collided");
 		float rabbit_y = rabbit.transform.position.y;
 		float orc_y = this.transform.position.y;
 
@@ -223,14 +224,16 @@ public class OrcBase : MonoBehaviour {
 		} 
 	}
 
-	void launchCarrot (float direction){
+	IEnumerator launchCarrot (float direction){
 		Vector3 launchPos = this.transform.position;
 		GameObject obj = Instantiate (this.prefab, launchPos, Quaternion.identity);
 		obj.transform.position = this.transform.position + Vector3.up;
-
+		Debug.Log ("kek");
 		Weapon carrot = obj.GetComponent<Weapon> ();
 		carrot.launch(direction);
-		Destroy(carrot, 2f);
+		Destroy(obj, 2f);
+		yield return new WaitForSeconds (shootTime);
+		launchCarrotCoroutine = null;
 	}
 
 	float getRabbitDirection(Rabbit rabbit){

@@ -90,7 +90,7 @@ public class Rabbit : MonoBehaviour {
 
 	public void OnDeathProcess(){
 		animator.SetBool("die", true);
-		if (SoundManager.Instanse.IsSoundOn()){dieSourse.Play ();}
+		if (SoundManager.IsSoundOn){dieSourse.Play ();}
 		myBody.isKinematic = true;
 
 	}
@@ -112,7 +112,7 @@ public class Rabbit : MonoBehaviour {
 			animator.SetBool ("run", true);
 
 		} else {
-			if (SoundManager.Instanse.IsSoundOn ()) {
+			if (SoundManager.IsSoundOn) {
 				runSourse.Play ();
 			}
 			animator.SetBool ("run", false);
@@ -153,9 +153,11 @@ public class Rabbit : MonoBehaviour {
 				jumpPlatformSourse.Play ();
 
 		} else {
-			if (SoundManager.Instanse.IsMusicOn ()) {
-				SetNewParent (this.transform, this.heroParent);
+			if (SoundManager.IsSoundOn) {
+				jumpPlatformSourse.Play ();
 			}
+				SetNewParent (this.transform, this.heroParent);
+
 		}
 
 		Debug.DrawLine (from, to, Color.red);

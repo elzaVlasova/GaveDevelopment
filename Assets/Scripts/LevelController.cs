@@ -29,6 +29,9 @@ public class LevelController : MonoBehaviour {
 	public AudioClip coinsSound = null;
 	AudioSource coinsSoundSourse = null;
 
+	public AudioClip fruitsSound = null;
+	AudioSource fruitsSoundSourse = null;
+
 	public AudioClip crystalsSound = null;
 	AudioSource crystalsSoundSourse = null;
 
@@ -66,6 +69,9 @@ public class LevelController : MonoBehaviour {
 		coinsSoundSourse = gameObject.AddComponent<AudioSource>();
 		coinsSoundSourse.clip = coinsSound;
 
+		fruitsSoundSourse = gameObject.AddComponent<AudioSource>();
+		fruitsSoundSourse.clip = coinsSound;
+
 		crystalsSoundSourse = gameObject.AddComponent<AudioSource>();
 		crystalsSoundSourse.clip = crystalsSound;
 
@@ -75,12 +81,14 @@ public class LevelController : MonoBehaviour {
 		crystalsCollected = new List <Crystals.Type>();
 		fruitsCollected = new List <Fruits.Type>();
 		rabbitLifes = 3;
+		musicSetting (SoundManager.IsMusicOn);
         //winnerWindow.SetActive (true);
 		//looseWindow.SetActive (true);
 	}
 
 
 	public void musicSetting(bool is_music_on){
+		Debug.Log ("SET MUSIC : " + is_music_on);
 		if (is_music_on) {
 			musicSourse.Play ();
 		} else { musicSourse.Stop ();
@@ -112,7 +120,7 @@ public class LevelController : MonoBehaviour {
 
 	public void onLoosePopup(){
 		looseWindow.SetActive (true);
-		if (SoundManager.Instanse.IsSoundOn ()) {
+		if (SoundManager.IsSoundOn) {
 			looseMusicSourse.Play ();
 		}
 	}
@@ -180,21 +188,26 @@ public class LevelController : MonoBehaviour {
 	public void addCoins(int quantity){
 		this.coins += quantity;
 		coinsLabel.text = coins.ToString ("0000");
-		if (SoundManager.Instanse.IsSoundOn ()) {
+		if (SoundManager.IsSoundOn) {
 			coinsSoundSourse.Play ();
 		}
 	}
 
 	public void addFruits(Fruits.Type type){
+		if (SoundManager.IsMusicOn) {
+			fruitsSoundSourse.Play ();
+			Debug.Log ("Fruit sound");
+		}
 		this.fruits ++;
 		fruitsCollected.Add (type);
 		fruitsLabel.text = fruits.ToString ();
+
 	}
 
 	public void addCrystals(Crystals.Type type){
 		crystalsCollected.Add (type);
 		Debug.Log ("Crystal collected count" + crystalsCollected.Count);
-		if (SoundManager.Instanse.IsSoundOn ()) {
+		if (SoundManager.IsSoundOn) {
 			crystalsSoundSourse.Play ();
 		}
 	}
@@ -204,7 +217,7 @@ public class LevelController : MonoBehaviour {
 			this.rabbitLifes++;
 			HealthUI.current.HealthTaken ();
 		}
-		if (SoundManager.Instanse.IsSoundOn ()) {
+		if (SoundManager.IsSoundOn) {
 			healthSoundSourse.Play ();
 		}
 	}
